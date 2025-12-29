@@ -63,13 +63,16 @@ flutter:
 
   # Assets configuration
   assets:
+    - assets/brain_gurd/
+    - assets/deep_quran/
+    - assets/giomax/
+    - assets/medix/
+    - assets/reparo/
+    - assets/roman/
+    - assets/trade_bridge/
     - assets/bg.png
     - assets/profile.jpeg
-    - assets/deep_quran/
-    - assets/trade_bridge/
-    - assets/reparo/
-    - assets/medix/
-    - assets/brain_guard/
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

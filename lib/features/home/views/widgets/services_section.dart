@@ -79,7 +79,7 @@ class ServicesSection extends StatelessWidget {
     final cardWidth = (availableWidth - totalSpacing) / cardsPerRow;
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 64),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),
       child: Wrap(
         spacing: cardSpacing,
         runSpacing: cardSpacing,

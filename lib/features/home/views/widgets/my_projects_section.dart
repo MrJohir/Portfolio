@@ -10,14 +10,14 @@ import 'package:portfolio/core/utils/theme/app_text_styles.dart';
 import 'package:portfolio/features/home/models/project_model.dart';
 
 /// Recent work section with project list and featured project
-class RecentWorkSection extends StatefulWidget {
-  const RecentWorkSection({super.key});
+class MyProjects extends StatefulWidget {
+  const MyProjects({super.key});
 
   @override
-  State<RecentWorkSection> createState() => _RecentWorkSectionState();
+  State<MyProjects> createState() => _MyProjectsState();
 }
 
-class _RecentWorkSectionState extends State<RecentWorkSection> {
+class _MyProjectsState extends State<MyProjects> {
   int _selectedProjectIndex = 0;
 
   // void _onProjectSelected(int index) {
@@ -31,11 +31,11 @@ class _RecentWorkSectionState extends State<RecentWorkSection> {
     final isDesktop = Responsive.isDesktop(context);
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppStrings.recentWork, style: AppTextStyles.sectionTitle),
+          Text(AppStrings.myProjects, style: AppTextStyles.sectionTitle),
           const SizedBox(height: 32),
           isDesktop ? _buildDesktopLayout() : _buildMobileLayout(),
         ],
@@ -54,7 +54,7 @@ class _RecentWorkSectionState extends State<RecentWorkSection> {
         children: [
           // Project list (fixed width with scroll)
           Container(
-            width: 240,
+            width: 300,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -128,7 +128,7 @@ class _RecentWorkSectionState extends State<RecentWorkSection> {
                         child: Text(
                           project.title,
                           style: AppTextStyles.workTitle.copyWith(
-                            fontSize: 13,
+                            fontSize: 14,
                             color: isSelected
                                 ? AppColors.primary
                                 : AppColors.textPrimary,
@@ -151,7 +151,7 @@ class _RecentWorkSectionState extends State<RecentWorkSection> {
                             'Live',
                             style: AppTextStyles.small.copyWith(
                               color: AppColors.green,
-                              fontSize: 10,
+                              fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -162,7 +162,7 @@ class _RecentWorkSectionState extends State<RecentWorkSection> {
                   Text(
                     project.category,
                     style: AppTextStyles.small.copyWith(
-                      fontSize: 11,
+                      fontSize: 12,
                       color: AppColors.textSecondary,
                     ),
                   ),
@@ -458,6 +458,42 @@ class _ProjectDetailsCard extends StatelessWidget {
     }
   }
 
+  /// Build description as bullet points
+  Widget _buildDescriptionBullets(List<String> points) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: points.map((point) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 6),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 6, right: 8),
+                width: 5,
+                height: 5,
+                decoration: const BoxDecoration(
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  point,
+                  style: AppTextStyles.body.copyWith(
+                    height: 1.5,
+                    color: AppColors.textSecondary,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -501,23 +537,14 @@ class _ProjectDetailsCard extends StatelessWidget {
             ),
             const SizedBox(height: 14),
 
-            // Description
-            Text(
-              project.description,
-              style: AppTextStyles.body.copyWith(
-                height: 1.6,
-                color: AppColors.textSecondary,
-                fontSize: 13,
-              ),
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
-            ),
+            // Description (bullet points)
+            _buildDescriptionBullets(project.descriptionPoints),
             const SizedBox(height: 16),
 
             // Tech stack
             Text(
               'Technologies',
-              style: AppTextStyles.workTitle.copyWith(fontSize: 13),
+              style: AppTextStyles.workTitle.copyWith(fontSize: 14),
             ),
             const SizedBox(height: 8),
             Wrap(
@@ -563,7 +590,7 @@ class _ProjectDetailsCard extends StatelessWidget {
               style: AppTextStyles.small.copyWith(
                 color: AppColors.green,
                 fontWeight: FontWeight.w600,
-                fontSize: 11,
+                fontSize: 12,
               ),
             ),
           ],
@@ -618,8 +645,8 @@ class _ProjectDetailsCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                project.isLive ? Icons.store : Icons.code,
-                size: 16,
+                project.isLive ? Icons.public : Icons.code,
+                size: 18,
                 color: Colors.white,
               ),
               const SizedBox(width: 6),
@@ -628,11 +655,11 @@ class _ProjectDetailsCard extends StatelessWidget {
                 style: AppTextStyles.small.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                  fontSize: 14,
                 ),
               ),
-              const SizedBox(width: 3),
-              const Icon(Icons.arrow_forward, size: 14, color: Colors.white),
+              const SizedBox(width: 6),
+              const Icon(Icons.arrow_forward, size: 16, color: Colors.white),
             ],
           ),
         ),
@@ -651,14 +678,14 @@ class _TechTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.15),
+        color: AppColors.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
       ),
       child: Text(
         label,
         style: AppTextStyles.small.copyWith(
-          color: Colors.white,
+          color: AppColors.primary,
           fontWeight: FontWeight.w500,
           fontSize: 11,
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 /// EmailJS service for sending contact form emails without backend
-/// 
+///
 /// Setup Instructions:
 /// 1. Go to https://www.emailjs.com/ and create a free account
 /// 2. Add an email service (Gmail, Outlook, etc.) in "Email Services"
@@ -21,11 +21,12 @@ class EmailJSService {
 
   // ⚠️ IMPORTANT: Replace these with your EmailJS credentials
   // Get these from your EmailJS dashboard: https://dashboard.emailjs.com/
-  static const String _serviceId = 'YOUR_SERVICE_ID';      // e.g., 'service_xxxxxxx'
-  static const String _templateId = 'YOUR_TEMPLATE_ID';    // e.g., 'template_xxxxxxx'
-  static const String _publicKey = 'YOUR_PUBLIC_KEY';      // e.g., 'xxxxxxxxxxx'
+  static const String _serviceId = 'service_7vvfp7p';
+  static const String _templateId = 'template_xp80tof';
+  static const String _publicKey = 'N_qzECoSIm6Bre-Z5';
 
-  static const String _emailJSUrl = 'https://api.emailjs.com/api/v1.0/email/send';
+  static const String _emailJSUrl =
+      'https://api.emailjs.com/api/v1.0/email/send';
 
   /// Send email using EmailJS API
   /// Returns true if email sent successfully, false otherwise
@@ -38,9 +39,7 @@ class EmailJSService {
     try {
       final response = await http.post(
         Uri.parse(_emailJSUrl),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'service_id': _serviceId,
           'template_id': _templateId,
@@ -79,9 +78,9 @@ class EmailResult {
 
   EmailResult._({required this.isSuccess, required this.message});
 
-  factory EmailResult.success(String message) => 
+  factory EmailResult.success(String message) =>
       EmailResult._(isSuccess: true, message: message);
-  
-  factory EmailResult.failure(String message) => 
+
+  factory EmailResult.failure(String message) =>
       EmailResult._(isSuccess: false, message: message);
 }

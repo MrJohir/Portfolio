@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:portfolio/core/common/widgets/buttons.dart';
 import 'package:portfolio/core/services/emailjs_service.dart';
 import 'package:portfolio/core/services/scroll_service.dart';
@@ -37,7 +36,7 @@ class _FooterSectionState extends State<FooterSection> {
   Future<void> _submitForm() async {
     if (_formKey.currentState?.validate() ?? false) {
       setState(() => _isLoading = true);
-      
+
       // Send email using EmailJS
       final result = await EmailJSService.instance.sendEmail(
         fromName: _nameController.text,
@@ -45,9 +44,9 @@ class _FooterSectionState extends State<FooterSection> {
         subject: _subjectController.text,
         message: _messageController.text,
       );
-      
+
       setState(() => _isLoading = false);
-      
+
       if (result.isSuccess) {
         // Clear form on success
         _nameController.clear();
@@ -55,12 +54,14 @@ class _FooterSectionState extends State<FooterSection> {
         _subjectController.clear();
         _messageController.clear();
       }
-      
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(result.message),
-            backgroundColor: result.isSuccess ? AppColors.primary : AppColors.error,
+            backgroundColor: result.isSuccess
+                ? AppColors.primary
+                : AppColors.error,
           ),
         );
       }
@@ -82,7 +83,7 @@ class _FooterSectionState extends State<FooterSection> {
     return Container(
       color: AppColors.backgroundDark,
       child: ResponsiveContainer(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 64),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         child: Column(
           children: [
             // Main Footer Content

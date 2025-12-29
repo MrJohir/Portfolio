@@ -37,11 +37,11 @@ class AppStrings {
       'Clean code solves problems, but collaboration builds legacies.';
   static const String seeCaseStudies = 'See my projects';
   static const String aboutTitle =
-      'Your Partner in Building Scalable Mobile Applications';
+      'PROFESSIONAL SUMMARY & WORK EXPERIENCE';
   static const String aboutPara1 =
       "I'm a Results-driven Flutter Developer and Team Lead with proven experience in building, leading, and delivering production-grade mobile applications published on both Google Play Store and Apple App Store.";
   static const String aboutPara2 =
-      'Strong expertise in Flutter architecture, state management (GetX, BLoC, Provider), API integration, and real-time systems. Adept at leading teams, owning application lifecycle, and shipping scalable, secure, and high-performance apps.';
+      'Strong expertise in Flutter architecture, state management (GetX, Provider, Riverpod), API integration, and real-time systems, AI Integration. Adept at leading teams, owning application lifecycle, and shipping scalable, secure, and high-performance apps.';
   static const String aboutPara3 =
       'Recognized for turning complex requirements into clean, user-focused solutions. I believe in writing clean, scalable code and fostering clear communication.';
   static const String workExperience = 'My Working Experience';
@@ -49,14 +49,14 @@ class AppStrings {
   // Work Experience
   static const String flutterTeamLead = 'Flutter Developer | Team Lead';
   static const String companyName = 'Softvency IT Limited';
-  static const String experiencePeriod = 'October 2024 – Present';
+  static const String experiencePeriod = 'October 2024 - Present';
 
   // Core Competencies
   static const String coreCompetencies = 'Core Competencies';
   static const String technicalSkills = 'Technical Skills';
 
   // Recent Work Section
-  static const String recentWork = 'My Recent Projects';
+  static const String myProjects = 'My Projects';
   static const String mobileAppDevelopment = 'Mobile App Development';
   static const String featuredProject = 'Featured Project';
   static const String liveOnStore = 'Live on Store';

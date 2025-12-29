@@ -1,9 +1,9 @@
+// ignore_for_file: deprecated_member_use, avoid_web_libraries_in_flutter
+
 import 'dart:async';
 import 'dart:html' as html;
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:portfolio/core/common/widgets/buttons.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_images.dart';
@@ -348,12 +348,21 @@ class _TechLogosState extends State<_TechLogos> {
           spacing: 16,
           runSpacing: 12,
           children: [
-            _TechBadge(label: 'Flutter', color: AppColors.blue),
             _TechBadge(label: 'Dart', color: AppColors.blue),
-            _TechBadge(label: 'GetX', color: AppColors.purple),
+            _TechBadge(label: 'Flutter', color: AppColors.blue),
+            _TechBadge(label: 'AI Integration', color: AppColors.orange),
             _TechBadge(label: 'Firebase', color: AppColors.orange),
+            _TechBadge(label: 'GetX', color: AppColors.purple),
+            _TechBadge(label: 'Provider', color: AppColors.purple),
+            _TechBadge(label: 'Riverpod', color: AppColors.purple),
+
             _TechBadge(label: 'REST API', color: AppColors.green),
-            _TechBadge(label: 'Git', color: AppColors.red),
+            _TechBadge(label: 'WebSockets', color: AppColors.green),
+            _TechBadge(label: 'Socket.IO', color: AppColors.green),
+            _TechBadge(label: 'Agora', color: AppColors.green),
+            _TechBadge(label: 'Google Maps', color: AppColors.green),
+            _TechBadge(label: 'Local Storage', color: AppColors.red),
+            _TechBadge(label: 'Deployment', color: AppColors.red),
           ],
         ),
       ),

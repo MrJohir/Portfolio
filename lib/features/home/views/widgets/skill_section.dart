@@ -5,8 +5,8 @@ import 'package:portfolio/core/utils/responsive/responsive.dart';
 import 'package:portfolio/core/utils/theme/app_text_styles.dart';
 
 /// Skills section with technical expertise
-class BlogSection extends StatelessWidget {
-  const BlogSection({super.key});
+class SkillSection extends StatelessWidget {
+  const SkillSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +35,20 @@ class BlogSection extends StatelessWidget {
         title: 'State Management',
         icon: Icons.sync_alt,
         iconColor: AppColors.orange,
-        skills: ['GetX', 'BLoC', 'Provider'],
+        skills: ['GetX', 'Provider', ' Riverpod'],
       ),
       _SkillCategoryData(
         title: 'Backend & APIs',
         icon: Icons.cloud,
         iconColor: AppColors.green,
-        skills: ['REST APIs', 'Firebase Services', 'WebSockets', 'Socket.IO'],
+        skills: [
+          'REST APIs',
+          'AI Integration',
+          'Firebase Services',
+          'WebSockets',
+          'Socket.IO',
+          'Google Maps',
+        ],
       ),
       _SkillCategoryData(
         title: 'Local Storage',
@@ -68,7 +75,7 @@ class BlogSection extends StatelessWidget {
     ];
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 64),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),
       child: Column(
         children: [
           // Section Header
