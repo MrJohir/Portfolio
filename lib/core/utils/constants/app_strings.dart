@@ -97,7 +97,7 @@ class AppStrings {
       "Have a project in mind? Let's discuss how I can help bring your mobile app ideas to life.";
   static const String sendMessage = 'Send Message';
   static const String copyright =
-      '© 2024 Md. Johirul Islam. All Rights Reserved.';
+      '© 2025 Md. Johirul Islam. All Rights Reserved.';
   static const String letsWorkTogether = "Let's Work Together";
   static const String contactSubtitle =
       "Let's build your next mobile application—or connect on GitHub to collaborate!";

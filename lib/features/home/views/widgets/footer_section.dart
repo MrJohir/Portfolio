@@ -177,6 +177,8 @@ class _FooterSectionState extends State<FooterSection> {
                           _FooterLink(text: 'Privacy Policy', onTap: () {}),
                           const SizedBox(width: 24),
                           _FooterLink(text: 'Terms of Service', onTap: () {}),
+                          const SizedBox(width: 48),
+                          const _BuiltWithFlutterBadge(),
                         ],
                       ),
                     ],
@@ -190,6 +192,8 @@ class _FooterSectionState extends State<FooterSection> {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      const SizedBox(height: 16),
+                      const _BuiltWithFlutterBadge(),
                     ],
                   ),
           ],
@@ -464,6 +468,82 @@ class _FooterLinkState extends State<_FooterLink> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Built with Flutter badge widget
+class _BuiltWithFlutterBadge extends StatelessWidget {
+  const _BuiltWithFlutterBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF02569B), Color(0xFF0468D7)],
+        ),
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Flutter Logo
+          Container(
+            width: 24,
+            height: 26,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(3),
+            ),
+            child: const Center(
+              child: Text(
+                'F',
+                style: TextStyle(
+                  color: Color(0xFF027DFD),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 18),
+          // Text
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Built with',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                'Flutter',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.3,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
