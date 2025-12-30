@@ -12,7 +12,7 @@ class Responsive {
 
   /// Check if current screen is mobile
   static bool isMobile(BuildContext context) {
-    return MediaQuery.sizeOf(context).width < tabletBreakpoint;
+    return MediaQuery.sizeOf(context).width < mobileBreakpoint;
   }
 
   /// Check if current screen is tablet

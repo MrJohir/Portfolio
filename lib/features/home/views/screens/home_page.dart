@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/common/widgets/nav_bar.dart';
 import 'package:portfolio/core/services/scroll_service.dart';
+import 'package:portfolio/core/utils/responsive/responsive.dart';
 import 'package:portfolio/features/home/views/widgets/about_section.dart';
 import 'package:portfolio/features/home/views/widgets/skill_section.dart';
 import 'package:portfolio/features/home/views/widgets/footer_section.dart';
@@ -16,32 +17,36 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scrollService = ScrollService.instance;
+    final isMobile = Responsive.isMobile(context);
 
     return Scaffold(
       body: SingleChildScrollView(
         controller: scrollService.scrollController,
-        child: Column(
-          children: [
-            // Navigation bar
-            const NavBar(),
-            // Hero section (Home)
-            HeroSection(key: scrollService.homeKey),
-            // About section with 3 cards
-            AboutSection(key: scrollService.aboutKey),
-            // Recent work section (Projects)
-            MyProjects(key: scrollService.projectsKey),
-            // Blog section (Skills)
-            SkillSection(key: scrollService.blogKey),
-            // Process section (6 steps)
-            const ProcessSection(),
-            // Services section
-            ServicesSection(key: scrollService.servicesKey),
-            // // Testimonials section
-            // TestimonialsSection(),
+        child: Padding(
+          padding: EdgeInsets.only(top: isMobile ? 36 : 0),
+          child: Column(
+            children: [
+              // Navigation bar
+              const NavBar(),
+              // Hero section (Home)
+              HeroSection(key: scrollService.homeKey),
+              // About section with 3 cards
+              AboutSection(key: scrollService.aboutKey),
+              // Recent work section (Projects)
+              MyProjects(key: scrollService.projectsKey),
+              // Blog section (Skills)
+              SkillSection(key: scrollService.blogKey),
+              // Process section (6 steps)
+              const ProcessSection(),
+              // Services section
+              ServicesSection(key: scrollService.servicesKey),
+              // // Testimonials section
+              // TestimonialsSection(),
 
-            // Footer with contact form
-            FooterSection(key: scrollService.contactKey),
-          ],
+              // Footer with contact form
+              FooterSection(key: scrollService.contactKey),
+            ],
+          ),
         ),
       ),
     );

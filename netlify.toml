@@ -1,0 +1,15 @@
+# Netlify configuration for Flutter web deployment
+
+[build]
+  # This is not needed for drag-and-drop, but useful if using Git deployment
+  command = "flutter build web --release"
+  publish = "build/web"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  # Environment variables (if needed in future)
+  FLUTTER_VERSION = "3.9.2"

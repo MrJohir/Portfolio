@@ -1,13 +1,11 @@
-// ignore_for_file: deprecated_member_use, avoid_web_libraries_in_flutter
-
 import 'dart:async';
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:portfolio/core/common/widgets/buttons.dart';
+import 'package:portfolio/core/services/platform_service.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_images.dart';
 import 'package:portfolio/core/utils/constants/app_strings.dart';
+import 'package:portfolio/core/utils/helpers/url_launcher_helper.dart';
 import 'package:portfolio/core/utils/responsive/responsive.dart';
 import 'package:portfolio/core/utils/theme/app_text_styles.dart';
 
@@ -21,8 +19,8 @@ class HeroSection extends StatelessWidget {
 
     return ResponsiveContainer(
       padding: EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: isDesktop ? 80 : 48,
+        horizontal: 20,
+        vertical: isDesktop ? 48 : 24,
       ),
       child: isDesktop ? _buildDesktopLayout() : _buildMobileLayout(),
     );
@@ -65,23 +63,13 @@ class HeroSection extends StatelessWidget {
           children: [
             PrimaryButton(
               text: AppStrings.exploreGithub,
-              onPressed: () async {
-                final uri = Uri.parse('https://github.com/MrJohir');
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
-                }
-              },
+              onPressed: () => UrlLauncherHelper.launchGitHub('MrJohir'),
             ),
             // SecondaryButton(text: AppStrings.downloadProcess, onPressed: () {}),
             SmallButton(
               text: AppStrings.donwloadCV,
               icon: Icons.download,
-              onPressed: () {
-                // Download CV from web folder
-                html.AnchorElement(href: 'Johirul.pdf')
-                  ..setAttribute('download', 'Johirul_CV.pdf')
-                  ..click();
-              },
+              onPressed: downloadCV,
               isPrimary: false,
             ),
           ],
@@ -287,9 +275,9 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(32),
+                  borderRadius: BorderRadius.circular(24),
                   child: Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(4),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(24),
                       child: PageView.builder(

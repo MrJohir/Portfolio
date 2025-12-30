@@ -31,7 +31,7 @@ class _MyProjectsState extends State<MyProjects> {
     final isDesktop = Responsive.isDesktop(context);
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -292,7 +292,7 @@ class _ProjectImageShowcaseState extends State<_ProjectImageShowcase> {
               child: Container(
                 width: 180,
                 height: 380,
-                margin: const EdgeInsets.symmetric(vertical: 30),
+                // margin: const EdgeInsets.symmetric(vertical: 2),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(28),

@@ -101,7 +101,7 @@ class SkillSection extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 48),
+          SizedBox(height: isDesktop ? 32 : 0),
 
           // Skills Grid
           GridView.builder(

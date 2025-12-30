@@ -15,7 +15,7 @@ class AboutSection extends StatelessWidget {
     final isTablet = Responsive.isTablet(context);
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: isDesktop
           ? _buildDesktopLayout()
           : isTablet
@@ -367,9 +367,7 @@ class _ExperienceItem extends StatelessWidget {
                 ),
                 child: Text(
                   isActive ? 'Current' : period,
-                  style: AppTextStyles.small.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: AppTextStyles.small.copyWith(color: Colors.white),
                 ),
               ),
             ],

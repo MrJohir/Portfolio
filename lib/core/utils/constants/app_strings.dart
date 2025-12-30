@@ -36,8 +36,7 @@ class AppStrings {
   static const String aboutQuote =
       'Clean code solves problems, but collaboration builds legacies.';
   static const String seeCaseStudies = 'See my projects';
-  static const String aboutTitle =
-      'PROFESSIONAL SUMMARY & WORK EXPERIENCE';
+  static const String aboutTitle = 'PROFESSIONAL SUMMARY & WORK EXPERIENCE';
   static const String aboutPara1 =
       "I'm a Results-driven Flutter Developer and Team Lead with proven experience in building, leading, and delivering production-grade mobile applications published on both Google Play Store and Apple App Store.";
   static const String aboutPara2 =

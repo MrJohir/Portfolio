@@ -1,0 +1,4 @@
+# Netlify redirects file for Flutter web SPA
+# This ensures all routes are handled by the Flutter app
+
+/*    /index.html   200

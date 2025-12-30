@@ -18,7 +18,7 @@ class ProcessSection extends StatelessWidget {
           Text(AppStrings.processTitle, style: AppTextStyles.sectionTitle),
           const SizedBox(height: 8),
           Text(AppStrings.processSubtitle, style: AppTextStyles.body),
-          const SizedBox(height: 40),
+          const SizedBox(height: 32),
           const _ProcessStepsGrid(),
           // const SizedBox(height: 24),
           // const _ActionButtons(),
@@ -84,14 +84,19 @@ class _ProcessStepsGrid extends StatelessWidget {
 
     // Calculate card width based on screen size
     final screenWidth = MediaQuery.of(context).size.width;
-    final horizontalPadding = 24.0 * 2;
+    // Match the horizontal padding from ResponsiveContainer (10 * 2)
+    final horizontalPadding = 10.0 * 2;
     final availableWidth = screenWidth - horizontalPadding;
     final cardSpacing = 16.0;
 
     // Desktop: 6 cards, Tablet: 3 cards, Mobile: 2 cards
     final cardsPerRow = isDesktop ? 6 : (isTablet ? 3 : 2);
     final totalSpacing = cardSpacing * (cardsPerRow - 1);
-    final cardWidth = (availableWidth - totalSpacing) / cardsPerRow;
+    // Ensure card width is never negative
+    final cardWidth = ((availableWidth - totalSpacing) / cardsPerRow).clamp(
+      100.0,
+      double.infinity,
+    );
 
     return Wrap(
       spacing: cardSpacing,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:portfolio/core/common/widgets/buttons.dart';
-import 'package:portfolio/core/services/emailjs_service.dart';
+import 'package:portfolio/core/services/platform_service.dart';
 import 'package:portfolio/core/services/scroll_service.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_strings.dart';
+import 'package:portfolio/core/utils/helpers/url_launcher_helper.dart';
 import 'package:portfolio/core/utils/responsive/responsive.dart';
 import 'package:portfolio/core/utils/theme/app_text_styles.dart';
 
@@ -24,6 +24,9 @@ class _FooterSectionState extends State<FooterSection> {
   final _messageController = TextEditingController();
   bool _isLoading = false;
 
+  // Platform-specific email service
+  final _emailService = EmailServiceImpl();
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -37,8 +40,8 @@ class _FooterSectionState extends State<FooterSection> {
     if (_formKey.currentState?.validate() ?? false) {
       setState(() => _isLoading = true);
 
-      // Send email using EmailJS
-      final result = await EmailJSService.instance.sendEmail(
+      // Send email using platform-specific service
+      final result = await _emailService.sendEmail(
         fromName: _nameController.text,
         fromEmail: _emailController.text,
         subject: _subjectController.text,
@@ -69,10 +72,7 @@ class _FooterSectionState extends State<FooterSection> {
   }
 
   Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
+    await UrlLauncherHelper.launch(url);
   }
 
   @override
@@ -83,7 +83,7 @@ class _FooterSectionState extends State<FooterSection> {
     return Container(
       color: AppColors.backgroundDark,
       child: ResponsiveContainer(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
         child: Column(
           children: [
             // Main Footer Content
@@ -157,7 +157,7 @@ class _FooterSectionState extends State<FooterSection> {
                     ],
                   ),
 
-            const SizedBox(height: 48),
+            const SizedBox(height: 32),
             const Divider(color: AppColors.borderDark),
             const SizedBox(height: 24),
 
@@ -418,15 +418,15 @@ class _ConnectSection extends StatelessWidget {
         const SizedBox(height: 16),
         _FooterLink(
           text: 'GitHub',
-          onTap: () => onTap('https://github.com/MrJohir'),
+          onTap: () => UrlLauncherHelper.launchGitHub('MrJohir'),
         ),
         _FooterLink(
           text: 'Phone: +880 1751-228824',
-          onTap: () => onTap('tel:+8801751228824'),
+          onTap: () => UrlLauncherHelper.launchPhone('+8801751228824'),
         ),
         _FooterLink(
           text: 'Email: mdjohiruli826@gmail.com',
-          onTap: () => onTap('mailto:mdjohiruli826@gmail.com'),
+          onTap: () => UrlLauncherHelper.launchEmail('mdjohiruli826@gmail.com'),
         ),
       ],
     );
