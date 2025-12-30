@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:portfolio/core/common/widgets/optimized_image.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_strings.dart';
 import 'package:portfolio/core/utils/responsive/responsive.dart';
@@ -20,11 +21,30 @@ class MyProjects extends StatefulWidget {
 class _MyProjectsState extends State<MyProjects> {
   int _selectedProjectIndex = 0;
 
-  // void _onProjectSelected(int index) {
-  //   setState(() {
-  //     _selectedProjectIndex = index;
-  //   });
-  // }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Precache first project's images on load
+    _precacheProjectImages(0);
+  }
+
+  void _precacheProjectImages(int index) {
+    final project = ProjectData.getProjectByIndex(index);
+    // Precache first 3 images of the project
+    for (int i = 0; i < 3 && i < project.images.length; i++) {
+      precacheImage(AssetImage(project.images[i]), context);
+    }
+  }
+
+  void _onProjectSelected(int index) {
+    if (_selectedProjectIndex != index) {
+      setState(() {
+        _selectedProjectIndex = index;
+      });
+      // Precache images when project is selected
+      _precacheProjectImages(index);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,11 +119,7 @@ class _MyProjectsState extends State<MyProjects> {
         return MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedProjectIndex = index;
-              });
-            },
+            onTap: () => _onProjectSelected(index),
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
@@ -328,13 +344,12 @@ class _ProjectImageShowcaseState extends State<_ProjectImageShowcase> {
                                   },
                                   itemCount: widget.project.images.length,
                                   itemBuilder: (context, index) {
-                                    return Image.asset(
-                                      widget.project.images[index],
+                                    return OptimizedImage(
+                                      imagePath: widget.project.images[index],
                                       fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                            return _buildPlaceholder();
-                                          },
+                                      width: 180,
+                                      height: 380,
+                                      errorWidget: _buildPlaceholder(),
                                     );
                                   },
                                 )

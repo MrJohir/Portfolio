@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:portfolio/core/common/widgets/optimized_image.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_images.dart';
 import 'package:portfolio/core/utils/constants/app_strings.dart';
@@ -92,17 +93,18 @@ class _PortraitCard extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Image.asset(
-          AppImages.profile,
+        child: OptimizedImage(
+          imagePath: AppImages.profile,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              color: AppColors.cardLight,
-              child: const Center(
-                child: Icon(Icons.person, size: 64, color: AppColors.textMuted),
-              ),
-            );
-          },
+          // Limit cache size for large profile image
+          width: 400,
+          height: 500,
+          errorWidget: Container(
+            color: AppColors.cardLight,
+            child: const Center(
+              child: Icon(Icons.person, size: 64, color: AppColors.textMuted),
+            ),
+          ),
         ),
       ),
     );

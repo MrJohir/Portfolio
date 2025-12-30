@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/common/widgets/buttons.dart';
+import 'package:portfolio/core/common/widgets/optimized_image.dart';
 import 'package:portfolio/core/services/platform_service.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_images.dart';
@@ -114,8 +115,12 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
   Timer? _autoSlideTimer;
   int _currentPage = 0;
 
-  /// Get showcase images from AppImages constants
-  List<String> get _showcaseImages => AppImages.showcaseImages;
+  /// Only show first few images in hero carousel for faster loading
+  static const int _maxHeroImages = 6;
+
+  /// Get limited showcase images for hero section
+  List<String> get _showcaseImages =>
+      AppImages.showcaseImages.take(_maxHeroImages).toList();
 
   @override
   void initState() {
@@ -131,17 +136,19 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Precache images safely
-    _precacheImages();
+    // Precache only essential images (background + first 3 carousel images)
+    _precacheEssentialImages();
   }
 
-  void _precacheImages() {
+  void _precacheEssentialImages() {
     if (!mounted) return;
     try {
+      // Precache background first
       precacheImage(const AssetImage(AppImages.heroBg), context);
-      for (final image in _showcaseImages) {
+      // Then precache first 3 showcase images
+      for (int i = 0; i < 3 && i < _showcaseImages.length; i++) {
         if (!mounted) return;
-        precacheImage(AssetImage(image), context);
+        precacheImage(AssetImage(_showcaseImages[i]), context);
       }
     } catch (_) {
       // Ignore precache errors during hot restart
@@ -229,27 +236,25 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
         borderRadius: BorderRadius.circular(16),
         child: Stack(
           children: [
-            // Background image - precached for faster loading
+            // Background image - optimized with cacheWidth for faster loading
             Positioned.fill(
-              child: Image.asset(
-                AppImages.heroBg,
+              child: OptimizedImage(
+                imagePath: AppImages.heroBg,
                 fit: BoxFit.cover,
-                gaplessPlayback: true,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          AppColors.primary.withValues(alpha: 0.15),
-                          AppColors.purple.withValues(alpha: 0.2),
-                          AppColors.blue.withValues(alpha: 0.15),
-                        ],
-                      ),
+                enableShimmer: false,
+                errorWidget: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        AppColors.primary.withValues(alpha: 0.15),
+                        AppColors.purple.withValues(alpha: 0.2),
+                        AppColors.blue.withValues(alpha: 0.15),
+                      ],
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
             ),
 
@@ -285,22 +290,11 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
                         onPageChanged: _onPageChanged,
                         itemCount: _showcaseImages.length,
                         itemBuilder: (context, index) {
-                          return Image.asset(
-                            _showcaseImages[index],
+                          return OptimizedImage(
+                            imagePath: _showcaseImages[index],
                             fit: BoxFit.cover,
-                            gaplessPlayback: true,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: AppColors.cardLight,
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.broken_image_outlined,
-                                    color: AppColors.textMuted,
-                                    size: 32,
-                                  ),
-                                ),
-                              );
-                            },
+                            width: 220,
+                            height: 450,
                           );
                         },
                       ),
