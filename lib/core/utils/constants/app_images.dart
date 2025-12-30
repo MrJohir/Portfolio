@@ -6,7 +6,7 @@ class AppImages {
   static const String heroBg = 'assets/bg.png';
 
   // Profile
-  static const String profile = 'assets/profile.jpeg';
+  static const String profile = 'assets/profile.png';
 
   // Showcase images for hero and recent work carousels
   static const List<String> showcaseImages = [

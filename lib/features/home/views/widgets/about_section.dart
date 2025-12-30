@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:portfolio/core/utils/constants/app_colors.dart';
+import 'package:portfolio/core/utils/constants/app_images.dart';
 import 'package:portfolio/core/utils/constants/app_strings.dart';
 import 'package:portfolio/core/utils/responsive/responsive.dart';
 import 'package:portfolio/core/utils/theme/app_text_styles.dart';
@@ -15,7 +16,7 @@ class AboutSection extends StatelessWidget {
     final isTablet = Responsive.isTablet(context);
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: isDesktop
           ? _buildDesktopLayout()
           : isTablet
@@ -92,7 +93,7 @@ class _PortraitCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.asset(
-          'assets/profile.jpeg',
+          AppImages.profile,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
             return Container(

@@ -71,7 +71,7 @@ flutter:
     - assets/roman/
     - assets/trade_bridge/
     - assets/bg.png
-    - assets/profile.jpeg
+    - assets/profile.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

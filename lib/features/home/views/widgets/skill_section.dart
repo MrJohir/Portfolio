@@ -75,7 +75,7 @@ class SkillSection extends StatelessWidget {
     ];
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         children: [
           // Section Header

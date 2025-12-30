@@ -11,7 +11,7 @@ class ProcessSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

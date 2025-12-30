@@ -83,7 +83,7 @@ class _FooterSectionState extends State<FooterSection> {
     return Container(
       color: AppColors.backgroundDark,
       child: ResponsiveContainer(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         child: Column(
           children: [
             // Main Footer Content
