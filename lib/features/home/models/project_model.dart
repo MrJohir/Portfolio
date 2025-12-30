@@ -121,12 +121,12 @@ class ProjectData {
         'Firebase (Auth, FCM)',
         'REST API',
         'WebSocket',
+        'Agora RTC',
         'Secure Storage',
       ],
       images: AppImages.giomaxImages,
       isLive: false,
-      githubUrl:
-          'https://github.com/Softvence-Omega-Cyber-Monk/giomaxatadxe_flutter',
+      githubUrl: '$githubBaseUrl/MediConnect',
     ),
     // 4. TradeBridge – Dual-Role E-Commerce Marketplace
     ProjectModel(
