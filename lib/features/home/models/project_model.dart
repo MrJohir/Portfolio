@@ -31,8 +31,8 @@ class ProjectModel {
   final String? appStoreUrl;
 
   /// Get store label based on isPlayStore flag
-  String get storeLabel =>
-      isPlayStore ? '🚀 Live on Play Store' : '🍎 Live on App Store';
+  // String get storeLabel =>
+  //     isPlayStore ? '🚀 Live on Play Store' : '🍎 Live on App Store';
 
   /// Get link button label
   String get linkLabel {
@@ -109,8 +109,8 @@ class ProjectData {
       ],
       images: AppImages.reparoImages,
       isLive: true,
-      storeUrl: 'https://apps.apple.com/us/app/reparo/id6756050921',
-      isPlayStore: false,
+      // storeUrl: 'https://apps.apple.com/us/app/reparo/id6756050921',
+      // isPlayStore: false,
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=com.gentleman.app',
       appStoreUrl: 'https://apps.apple.com/us/app/reparo/id6756050921',
