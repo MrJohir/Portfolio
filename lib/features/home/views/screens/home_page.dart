@@ -40,31 +40,28 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         controller: scrollService.scrollController,
-        child: Padding(
-          padding: EdgeInsets.only(top: isMobile ? 36 : 0),
-          child: Column(
-            children: [
-              // Navigation bar
-              const NavBar(),
-              // Hero section (Home)
-              HeroSection(key: scrollService.homeKey),
-              // About section with 3 cards
-              AboutSection(key: scrollService.aboutKey),
-              // Recent work section (Projects)
-              MyProjects(key: scrollService.projectsKey),
-              // Blog section (Skills)
-              SkillSection(key: scrollService.blogKey),
-              // Process section (6 steps)
-              const ProcessSection(),
-              // Services section
-              ServicesSection(key: scrollService.servicesKey),
-              // // Testimonials section
-              // TestimonialsSection(),
-
-              // Footer with contact form
-              FooterSection(key: scrollService.contactKey),
-            ],
-          ),
+        child: Column(
+          children: [
+            // Navigation bar
+            const NavBar(),
+            // Hero section (Home)
+            HeroSection(key: scrollService.homeKey),
+            // About section with 3 cards
+            AboutSection(key: scrollService.aboutKey),
+            // Recent work section (Projects)
+            MyProjects(key: scrollService.projectsKey),
+            // Blog section (Skills)
+            SkillSection(key: scrollService.blogKey),
+            // Process section (6 steps)
+            const ProcessSection(),
+            // Services section
+            ServicesSection(key: scrollService.servicesKey),
+            // // Testimonials section
+            // TestimonialsSection(),
+        
+            // Footer with contact form
+            FooterSection(key: scrollService.contactKey),
+          ],
         ),
       ),
     );

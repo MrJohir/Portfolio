@@ -581,36 +581,23 @@ class _ProjectDetailsCard extends StatelessWidget {
 
   Widget _buildBadge() {
     if (project.isLive) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        decoration: BoxDecoration(
-          color: AppColors.green.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(100),
-          border: Border.all(color: AppColors.green.withValues(alpha: 0.3)),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+      if (project.isOnBothStores) {
+        // Show both badges
+        return Wrap(
+          spacing: 8,
+          runSpacing: 8,
           children: [
-            Container(
-              width: 6,
-              height: 6,
-              decoration: const BoxDecoration(
-                color: AppColors.green,
-                shape: BoxShape.circle,
-              ),
-            ),
-            const SizedBox(width: 6),
-            Text(
-              project.isPlayStore ? 'Live on Play Store' : 'Live on App Store',
-              style: AppTextStyles.small.copyWith(
-                color: AppColors.green,
-                fontWeight: FontWeight.w600,
-                fontSize: 12,
-              ),
-            ),
+            _buildStoreBadge('Live on Play Store', AppColors.green),
+            _buildStoreBadge('Live on App Store', AppColors.blue),
           ],
-        ),
-      );
+        );
+      } else {
+        // Show single badge
+        return _buildStoreBadge(
+          project.isPlayStore ? 'Live on Play Store' : 'Live on App Store',
+          project.isPlayStore ? AppColors.green : AppColors.blue,
+        );
+      }
     } else {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -638,19 +625,100 @@ class _ProjectDetailsCard extends StatelessWidget {
     }
   }
 
+  Widget _buildStoreBadge(String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: AppTextStyles.small.copyWith(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildActionButton() {
+    if (project.isOnBothStores) {
+      // Show both buttons for dual-store projects
+      return Wrap(
+        spacing: 12,
+        runSpacing: 12,
+        children: [
+          _buildStoreButton(
+            label: 'View on Play Store',
+            url: project.playStoreUrl!,
+            icon: Icons.shop,
+            color: AppColors.green,
+          ),
+          _buildStoreButton(
+            label: 'View on App Store',
+            url: project.appStoreUrl!,
+            icon: Icons.apple,
+            color: AppColors.blue,
+          ),
+        ],
+      );
+    }
+
+    // Single button - icon based on store type
+    IconData buttonIcon;
+    Color buttonColor;
+
+    if (!project.isLive) {
+      buttonIcon = Icons.code;
+      buttonColor = AppColors.primary;
+    } else if (project.isPlayStore) {
+      buttonIcon = Icons.shop;
+      buttonColor = AppColors.green;
+    } else {
+      buttonIcon = Icons.apple;
+      buttonColor = AppColors.blue;
+    }
+
+    return _buildStoreButton(
+      label: project.linkLabel,
+      url: project.linkUrl,
+      icon: buttonIcon,
+      color: buttonColor,
+    );
+  }
+
+  Widget _buildStoreButton({
+    required String label,
+    required String url,
+    required IconData icon,
+    required Color color,
+  }) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => _launchUrl(project.linkUrl),
+        onTap: () => _launchUrl(url),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            color: color,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withValues(alpha: 0.2),
+                color: color.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 3),
               ),
@@ -659,14 +727,10 @@ class _ProjectDetailsCard extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                project.isLive ? Icons.public : Icons.code,
-                size: 18,
-                color: Colors.white,
-              ),
+              Icon(icon, size: 18, color: Colors.white),
               const SizedBox(width: 6),
               Text(
-                project.linkLabel,
+                label,
                 style: AppTextStyles.small.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

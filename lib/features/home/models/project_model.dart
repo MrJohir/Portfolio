@@ -13,6 +13,8 @@ class ProjectModel {
     this.storeUrl,
     this.githubUrl,
     this.isPlayStore = false,
+    this.playStoreUrl,
+    this.appStoreUrl,
   });
 
   final String id;
@@ -25,6 +27,8 @@ class ProjectModel {
   final String? storeUrl;
   final String? githubUrl;
   final bool isPlayStore;
+  final String? playStoreUrl;
+  final String? appStoreUrl;
 
   /// Get store label based on isPlayStore flag
   String get storeLabel =>
@@ -38,6 +42,13 @@ class ProjectModel {
 
   /// Get link URL
   String get linkUrl => isLive ? (storeUrl ?? '') : (githubUrl ?? '');
+
+  /// Check if project is live on both stores
+  bool get isOnBothStores =>
+      playStoreUrl != null &&
+      appStoreUrl != null &&
+      playStoreUrl!.isNotEmpty &&
+      appStoreUrl!.isNotEmpty;
 }
 
 /// Static list of all portfolio projects
@@ -78,7 +89,7 @@ class ProjectData {
     ProjectModel(
       id: 'reparo',
       category: 'Service Booking Platform',
-      title: 'ServiGo (Reparo)',
+      title: 'Reparo',
       descriptionPoints: [
         'Built a scalable, subscription-based service marketplace connecting customers with professional service providers.',
         'Implemented end-to-end booking flow with real-time availability, location-based services, and role-based dashboards.',
@@ -100,6 +111,9 @@ class ProjectData {
       isLive: true,
       storeUrl: 'https://apps.apple.com/us/app/reparo/id6756050921',
       isPlayStore: false,
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=com.gentleman.app',
+      appStoreUrl: 'https://apps.apple.com/us/app/reparo/id6756050921',
     ),
     // 3. MediConnect – Hospital Management Platform (NEW)
     ProjectModel(
