@@ -116,11 +116,10 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
   int _currentPage = 0;
 
   /// Only show first few images in hero carousel for faster loading
-  static const int _maxHeroImages = 6;
+  // static const int _maxHeroImages = 6;
 
   /// Get limited showcase images for hero section
-  List<String> get _showcaseImages =>
-      AppImages.showcaseImages.take(_maxHeroImages).toList();
+  List<String> get _showcaseImages => AppImages.showcaseImages.toList();
 
   @override
   void initState() {
@@ -145,8 +144,8 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
     try {
       // Precache background first
       precacheImage(const AssetImage(AppImages.heroBg), context);
-      // Then precache first 3 showcase images
-      for (int i = 0; i < 3 && i < _showcaseImages.length; i++) {
+      // Precache all showcase images to avoid shimmer on carousel transitions
+      for (int i = 0; i < _showcaseImages.length; i++) {
         if (!mounted) return;
         precacheImage(AssetImage(_showcaseImages[i]), context);
       }

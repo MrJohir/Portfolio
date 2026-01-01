@@ -30,8 +30,8 @@ class _MyProjectsState extends State<MyProjects> {
 
   void _precacheProjectImages(int index) {
     final project = ProjectData.getProjectByIndex(index);
-    // Precache first 3 images of the project
-    for (int i = 0; i < 3 && i < project.images.length; i++) {
+    // Precache all images of the project to avoid shimmer on carousel transitions
+    for (int i = 0; i < project.images.length; i++) {
       precacheImage(AssetImage(project.images[i]), context);
     }
   }
