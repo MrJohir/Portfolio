@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:portfolio/core/common/widgets/optimized_image.dart';
+import 'package:portfolio/core/common/widgets/network_image.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_strings.dart';
 import 'package:portfolio/core/utils/responsive/responsive.dart';
@@ -24,16 +24,13 @@ class _MyProjectsState extends State<MyProjects> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Precache first project's images on load
+    // Pre-cache first project's images into memory on initial load
     _precacheProjectImages(0);
   }
 
   void _precacheProjectImages(int index) {
     final project = ProjectData.getProjectByIndex(index);
-    // Precache all images of the project to avoid shimmer on carousel transitions
-    for (int i = 0; i < project.images.length; i++) {
-      precacheImage(AssetImage(project.images[i]), context);
-    }
+    precacheNetworkImages(context, project.images);
   }
 
   void _onProjectSelected(int index) {
@@ -41,7 +38,7 @@ class _MyProjectsState extends State<MyProjects> {
       setState(() {
         _selectedProjectIndex = index;
       });
-      // Precache images when project is selected
+      // Pre-cache selected project's images so carousel slides are instant
       _precacheProjectImages(index);
     }
   }
@@ -308,7 +305,6 @@ class _ProjectImageShowcaseState extends State<_ProjectImageShowcase> {
               child: Container(
                 width: 180,
                 height: 380,
-                // margin: const EdgeInsets.symmetric(vertical: 2),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(28),
@@ -344,12 +340,11 @@ class _ProjectImageShowcaseState extends State<_ProjectImageShowcase> {
                                   },
                                   itemCount: widget.project.images.length,
                                   itemBuilder: (context, index) {
-                                    return OptimizedImage(
-                                      imagePath: widget.project.images[index],
+                                    return AppNetworkImage(
+                                      imageUrl: widget.project.images[index],
                                       fit: BoxFit.cover,
                                       width: 180,
                                       height: 380,
-                                      errorWidget: _buildPlaceholder(),
                                     );
                                   },
                                 )

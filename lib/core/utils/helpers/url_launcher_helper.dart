@@ -96,8 +96,9 @@ class UrlLauncherHelper {
       url = email;
     } else {
       final params = <String>[];
-      if (subject != null)
+      if (subject != null) {
         params.add('subject=${Uri.encodeComponent(subject)}');
+      }
       if (body != null) params.add('body=${Uri.encodeComponent(body)}');
       url = 'mailto:$email${params.isNotEmpty ? '?${params.join('&')}' : ''}';
     }

@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^6.3.3
   url_launcher: ^6.3.2
   http: ^1.6.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -62,16 +63,16 @@ flutter:
   uses-material-design: true
 
   # Assets configuration
-  assets:
-    - assets/brain_gurd/
-    - assets/deep_quran/
-    - assets/giomax/
-    - assets/medix/
-    - assets/reparo/
-    - assets/roman/
-    - assets/trade_bridge/
-    - assets/bg.png
-    - assets/profile.png
+  # assets:
+    # - assets/brain_gurd/
+    # - assets/deep_quran/
+    # - assets/giomax/
+    # - assets/medix/
+    # - assets/reparo/
+    # - assets/roman/
+    # - assets/trade_bridge/
+    # - assets/bg.png
+    # - assets/profile.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

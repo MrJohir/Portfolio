@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/common/widgets/buttons.dart';
-import 'package:portfolio/core/common/widgets/optimized_image.dart';
+import 'package:portfolio/core/common/widgets/network_image.dart';
 import 'package:portfolio/core/services/platform_service.dart';
 import 'package:portfolio/core/utils/constants/app_colors.dart';
 import 'package:portfolio/core/utils/constants/app_images.dart';
@@ -115,18 +115,21 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
   Timer? _autoSlideTimer;
   int _currentPage = 0;
 
-  /// Only show first few images in hero carousel for faster loading
-  // static const int _maxHeroImages = 6;
-
-  /// Get limited showcase images for hero section
-  List<String> get _showcaseImages => AppImages.showcaseImages.toList();
+  /// Get showcase images for hero section
+  List<String> get _showcaseImages =>
+      AppImages.deepQuranImages +
+      AppImages.tradeBridgeImages +
+      AppImages.giomaxImages +
+      AppImages.reparoImages +
+      AppImages.medixImages +
+      AppImages.romanImages +
+      AppImages.brainGurdImages;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _pageController = PageController();
-    // Delay starting auto slide to ensure widget is fully built
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _startAutoSlide();
     });
@@ -135,23 +138,9 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Precache only essential images (background + first 3 carousel images)
-    _precacheEssentialImages();
-  }
-
-  void _precacheEssentialImages() {
-    if (!mounted) return;
-    try {
-      // Precache background first
-      precacheImage(const AssetImage(AppImages.heroBg), context);
-      // Precache all showcase images to avoid shimmer on carousel transitions
-      for (int i = 0; i < _showcaseImages.length; i++) {
-        if (!mounted) return;
-        precacheImage(AssetImage(_showcaseImages[i]), context);
-      }
-    } catch (_) {
-      // Ignore precache errors during hot restart
-    }
+    // Pre-cache ALL carousel images + background into memory.
+    // Once cached, PageView slides show instantly — no shimmer.
+    precacheNetworkImages(context, [AppImages.heroBg, ..._showcaseImages]);
   }
 
   @override
@@ -235,25 +224,11 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
         borderRadius: BorderRadius.circular(16),
         child: Stack(
           children: [
-            // Background image - optimized with cacheWidth for faster loading
+            // Background image
             Positioned.fill(
-              child: OptimizedImage(
-                imagePath: AppImages.heroBg,
+              child: AppNetworkImage(
+                imageUrl: AppImages.heroBg,
                 fit: BoxFit.cover,
-                enableShimmer: false,
-                errorWidget: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        AppColors.primary.withValues(alpha: 0.15),
-                        AppColors.purple.withValues(alpha: 0.2),
-                        AppColors.blue.withValues(alpha: 0.15),
-                      ],
-                    ),
-                  ),
-                ),
               ),
             ),
 
@@ -289,8 +264,8 @@ class _HeroImageShowcaseState extends State<_HeroImageShowcase>
                         onPageChanged: _onPageChanged,
                         itemCount: _showcaseImages.length,
                         itemBuilder: (context, index) {
-                          return OptimizedImage(
-                            imagePath: _showcaseImages[index],
+                          return AppNetworkImage(
+                            imageUrl: _showcaseImages[index],
                             fit: BoxFit.cover,
                             width: 220,
                             height: 450,

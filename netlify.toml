@@ -1,8 +1,8 @@
 # Netlify configuration for Flutter web deployment
 
 [build]
-  # This is not needed for drag-and-drop, but useful if using Git deployment
-  command = "flutter build web --release"
+  # Optimized build: tree-shake icons, use canvaskit, max dart2js optimization
+  command = "flutter build web --release --web-renderer canvaskit --dart2js-optimization O4 --tree-shake-icons"
   publish = "build/web"
 
 [[redirects]]

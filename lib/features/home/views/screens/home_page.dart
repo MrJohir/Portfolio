@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/common/widgets/nav_bar.dart';
-import 'package:portfolio/core/services/image_precache_service.dart';
 import 'package:portfolio/core/services/scroll_service.dart';
 import 'package:portfolio/core/utils/responsive/responsive.dart';
 import 'package:portfolio/features/home/views/widgets/about_section.dart';
@@ -20,18 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _imagesPreached = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Precache critical images on first build
-    if (!_imagesPreached) {
-      _imagesPreached = true;
-      ImagePrecacheService.instance.precacheCriticalImages(context);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final scrollService = ScrollService.instance;
@@ -58,7 +45,7 @@ class _HomePageState extends State<HomePage> {
             ServicesSection(key: scrollService.servicesKey),
             // // Testimonials section
             // TestimonialsSection(),
-        
+
             // Footer with contact form
             FooterSection(key: scrollService.contactKey),
           ],
