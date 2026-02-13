@@ -31,9 +31,9 @@ class AboutSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Expanded(child: SizedBox(height: 500, child: _PortraitCard())),
-        const SizedBox(width: 32),
+        const SizedBox(width: 24),
         Expanded(child: _DescriptionCard()),
-        const SizedBox(width: 32),
+        const SizedBox(width: 24),
         Expanded(child: _ExperienceCard()),
       ],
     );
@@ -47,7 +47,7 @@ class AboutSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Expanded(
-                child: SizedBox(height: 400, child: _PortraitCard()),
+                child: SizedBox(height: 500, child: _PortraitCard()),
               ),
               const SizedBox(width: 24),
               Expanded(child: _DescriptionCard()),
@@ -148,7 +148,7 @@ class _DescriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.surfaceLight,
         borderRadius: BorderRadius.circular(16),
@@ -166,17 +166,17 @@ class _DescriptionCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(AppStrings.aboutTitle, style: AppTextStyles.sectionTitle),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
             Text(
               AppStrings.aboutPara1,
               style: AppTextStyles.body.copyWith(height: 1.7),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Text(
               AppStrings.aboutPara2,
               style: AppTextStyles.body.copyWith(height: 1.7),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Text(
               AppStrings.aboutPara3,
               style: AppTextStyles.body.copyWith(height: 1.7),
@@ -193,7 +193,7 @@ class _ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.surfaceLight,
         borderRadius: BorderRadius.circular(16),
@@ -209,14 +209,21 @@ class _ExperienceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(AppStrings.workExperience, style: AppTextStyles.cardTitle),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
+          const _ExperienceItem(
+            title: 'Mobile Application Developer (Flutter)',
+            company: 'ADEVS',
+            period: 'Jan 2026 - Present',
+            isActive: true,
+          ),
+          const SizedBox(height: 8),
           const _ExperienceItem(
             title: 'Flutter Developer | Team Lead',
             company: 'Softvency IT Limited',
-            period: 'Oct 2024 - Present',
-            isActive: true,
+            period: 'Oct 2024 - Dec 2025',
+            isActive: false,
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
           // Education Section
           Text(AppStrings.education, style: AppTextStyles.cardTitle),
           const SizedBox(height: 16),
@@ -226,13 +233,13 @@ class _ExperienceCard extends StatelessWidget {
             year: '2024',
             grade: 'CGPA: 3.47 / 4.00',
           ),
-          const SizedBox(height: 12),
-          const _EducationItem(
-            degree: 'Higher Secondary Certificate (Science)',
-            institution: 'Dinajpur Board',
-            year: '2020',
-            grade: 'GPA: 4.08 / 5.00',
-          ),
+          // const SizedBox(height: 12),
+          // const _EducationItem(
+          //   degree: 'Higher Secondary Certificate (Science)',
+          //   institution: 'Dinajpur Board',
+          //   year: '2020',
+          //   grade: 'GPA: 4.08 / 5.00',
+          // ),
           const SizedBox(height: 24),
           // Certifications
           Text(AppStrings.certifications, style: AppTextStyles.cardTitle),
@@ -334,11 +341,11 @@ class _ExperienceItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: isActive
             ? AppColors.primary.withValues(alpha: 0.1)
-            : Colors.transparent,
+            : AppColors.borderLight,
         borderRadius: BorderRadius.circular(12),
         border: Border(
           left: BorderSide(
-            color: isActive ? AppColors.primary : AppColors.borderLight,
+            color: isActive ? AppColors.primary : AppColors.borderDark,
             width: 3,
           ),
         ),

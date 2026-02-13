@@ -19,10 +19,7 @@ class HeroSection extends StatelessWidget {
     final isDesktop = Responsive.isDesktop(context);
 
     return ResponsiveContainer(
-      padding: EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: isDesktop ? 48 : 24,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: isDesktop ? _buildDesktopLayout() : _buildMobileLayout(),
     );
   }

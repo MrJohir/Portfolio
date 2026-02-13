@@ -25,31 +25,38 @@ class _HomePageState extends State<HomePage> {
     final isMobile = Responsive.isMobile(context);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        controller: scrollService.scrollController,
-        child: Column(
-          children: [
-            // Navigation bar
-            const NavBar(),
-            // Hero section (Home)
-            HeroSection(key: scrollService.homeKey),
-            // About section with 3 cards
-            AboutSection(key: scrollService.aboutKey),
-            // Recent work section (Projects)
-            MyProjects(key: scrollService.projectsKey),
-            // Blog section (Skills)
-            SkillSection(key: scrollService.blogKey),
-            // Process section (6 steps)
-            const ProcessSection(),
-            // Services section
-            ServicesSection(key: scrollService.servicesKey),
-            // // Testimonials section
-            // TestimonialsSection(),
+      body: Column(
+        children: [
+          // Fixed Navigation bar at the top
+          const NavBar(),
+          // Scrollable content
+          Expanded(
+            child: SingleChildScrollView(
+              controller: scrollService.scrollController,
+              child: Column(
+                children: [
+                  // Hero section (Home)
+                  HeroSection(key: scrollService.homeKey),
+                  // About section with 3 cards
+                  AboutSection(key: scrollService.aboutKey),
+                  // Recent work section (Projects)
+                  MyProjects(key: scrollService.projectsKey),
+                  // Blog section (Skills)
+                  SkillSection(key: scrollService.blogKey),
+                  // Process section (6 steps)
+                  const ProcessSection(),
+                  // Services section
+                  ServicesSection(key: scrollService.servicesKey),
+                  // // Testimonials section
+                  // TestimonialsSection(),
 
-            // Footer with contact form
-            FooterSection(key: scrollService.contactKey),
-          ],
-        ),
+                  // Footer with contact form
+                  FooterSection(key: scrollService.contactKey),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -12,7 +12,7 @@ class AppTextStyles {
 
   // Hero title - text-4xl lg:text-5xl font-bold
   static TextStyle get heroTitle => _baseStyle.copyWith(
-    fontSize: 48,
+    fontSize: 32,
     fontWeight: FontWeight.w700,
     height: 1.1,
     color: AppColors.textPrimary,

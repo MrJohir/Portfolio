@@ -36,14 +36,14 @@ class AppStrings {
   static const String aboutQuote =
       'Clean code solves problems, but collaboration builds legacies.';
   static const String seeCaseStudies = 'See my projects';
-  static const String aboutTitle = 'PROFESSIONAL SUMMARY & WORK EXPERIENCE';
+  static const String aboutTitle = 'PROFESSIONAL SUMMARY';
   static const String aboutPara1 =
       "I'm a Results-driven Flutter Developer and Team Lead with proven experience in building, leading, and delivering production-grade mobile applications published on both Google Play Store and Apple App Store.";
   static const String aboutPara2 =
       'Strong expertise in Flutter architecture, state management (GetX, Provider, Riverpod), API integration, and real-time systems, AI Integration. Adept at leading teams, owning application lifecycle, and shipping scalable, secure, and high-performance apps.';
   static const String aboutPara3 =
       'Recognized for turning complex requirements into clean, user-focused solutions. I believe in writing clean, scalable code and fostering clear communication.';
-  static const String workExperience = 'My Working Experience';
+  static const String workExperience = 'PROFESSIONAL EXPERIENCE';
 
   // Work Experience
   static const String flutterTeamLead = 'Flutter Developer | Team Lead';
@@ -125,5 +125,5 @@ class AppStrings {
   static const String certification1 =
       'Flutter App Development (Ostad Limited) – 6 Months, 2024';
   static const String certification2 =
-      'Flutter App Development (Learning Approach) – 3 Months, 2024';
+      'Flutter App Development (Learning Approach) – 3 Months, 2023';
 }

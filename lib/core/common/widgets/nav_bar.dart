@@ -15,7 +15,7 @@ class NavBar extends StatelessWidget {
     final isDesktop = Responsive.isDesktop(context);
 
     return ResponsiveContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -87,7 +87,7 @@ class NavBar extends StatelessWidget {
           onTap: () => ScrollService.instance.scrollToContact(),
           borderRadius: BorderRadius.circular(100),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
             child: Text(
               AppStrings.hireMe,
               style: AppTextStyles.button.copyWith(fontWeight: FontWeight.w500),
